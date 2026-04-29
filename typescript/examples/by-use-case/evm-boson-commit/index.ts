@@ -10,14 +10,16 @@
  *
  * Required env vars:
  *   WALLET_PRIVATE_KEY   — 0x-prefixed private key for a funded Amoy wallet
- *   OPENAI_API_KEY       — OpenAI API key
- *   BOSON_MCP_URL        — (optional) override the default MCP endpoint
+ *   ANTHROPIC_API_KEY    — Anthropic API key
+ *   BOSON_MCP_URL        — (optional) override; defaults to the staging MCP
+ *                          (mcp-staging.bosonprotocol.io) so Polygon Amoy works.
+ *                          For mainnet flows use https://mcp.bosonprotocol.io/mcp.
  */
 
 import readline from "node:readline";
-import { openai } from "@ai-sdk/openai";
+import { anthropic } from "@ai-sdk/anthropic";
 import { getOnChainTools } from "@goat-sdk/adapter-vercel-ai";
-import { boson } from "@goat-sdk/plugin-boson";
+import { bosonProtocolPlugin } from "@goat-sdk/plugin-boson";
 import { viem } from "@goat-sdk/wallet-viem";
 import { type CoreMessage, generateText } from "ai";
 import { http, createWalletClient } from "viem";
@@ -26,7 +28,10 @@ import { polygonAmoy } from "viem/chains";
 
 require("dotenv").config();
 
-const BOSON_MCP_URL = process.env.BOSON_MCP_URL ?? "https://mcp.bosonprotocol.io/mcp";
+// Default to staging because Polygon Amoy (the chain hardcoded below) only lives
+// on the staging MCP. For mainnet runs (Base/Optimism/Ethereum), set
+// BOSON_MCP_URL=https://mcp.bosonprotocol.io/mcp and pick a matching chain.
+const BOSON_MCP_URL = process.env.BOSON_MCP_URL ?? "https://mcp-staging.bosonprotocol.io/mcp";
 
 // 1. Create a wallet client for Polygon Amoy testnet
 const account = privateKeyToAccount(process.env.WALLET_PRIVATE_KEY as `0x${string}`);
@@ -41,7 +46,7 @@ const walletClient = createWalletClient({
     // 2. Get on-chain tools including the Boson plugin
     const tools = await getOnChainTools({
         wallet: viem(walletClient),
-        plugins: [boson({ mcpUrl: BOSON_MCP_URL })],
+        plugins: [bosonProtocolPlugin({ url: BOSON_MCP_URL })],
     });
 
     const systemPrompt = `You are an AI agent with access to Boson Protocol, a trust-minimized commerce platform for physical goods.
@@ -88,7 +93,7 @@ Before committing, always:
 
         try {
             const result = await generateText({
-                model: openai("gpt-4o"),
+                model: anthropic("claude-sonnet-4-6"),
                 system: systemPrompt,
                 messages,
                 tools,

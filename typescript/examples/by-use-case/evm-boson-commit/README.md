@@ -19,7 +19,7 @@ cp .env.example .env
 
 ```
 WALLET_PRIVATE_KEY=0x...   # Funded Polygon Amoy testnet wallet
-OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...
 ```
 
 ## Get a testnet wallet

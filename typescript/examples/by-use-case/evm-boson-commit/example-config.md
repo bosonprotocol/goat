@@ -8,10 +8,13 @@ Copy the variables below into a `.env` file in this directory. Never commit `.en
 # =============================================================================
 
 # Boson MCP server endpoint
-BOSON_MCP_URL=https://mcp.bosonprotocol.io/mcp
+# Staging (testnets — Polygon Amoy, Base Sepolia, Sepolia, OP Sepolia, Arbitrum Sepolia):
+BOSON_MCP_URL=https://mcp-staging.bosonprotocol.io/mcp
+# Production (mainnets — Ethereum, Optimism, Base):
+# BOSON_MCP_URL=https://mcp.bosonprotocol.io/mcp
 
 # AI model key
-OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...
 
 # =============================================================================
 # Required — write operations (commit, redeem, dispute, etc.)
@@ -42,7 +45,7 @@ The example supports both read-only and write modes depending on which env vars 
 
 | Mode | Required vars |
 |------|--------------|
-| Read-only (browse offers, exchanges, disputes) | `BOSON_MCP_URL`, `OPENAI_API_KEY` |
+| Read-only (browse offers, exchanges, disputes) | `BOSON_MCP_URL`, `ANTHROPIC_API_KEY` |
 | Write (commit, redeem, raise dispute, etc.) | + `WALLET_PRIVATE_KEY` |
 
 For write operations, the wallet must have:

@@ -30,6 +30,9 @@ describe("BosonProtocolPlugin", () => {
         ["Arbitrum", 42161],
         ["Polygon Amoy testnet", 80002],
         ["Base Sepolia testnet", 84532],
+        ["Sepolia testnet", 11155111],
+        ["Optimism Sepolia testnet", 11155420],
+        ["Arbitrum Sepolia testnet", 421614],
     ])("supports %s (%i)", (_name, chainId) => {
         const plugin = bosonProtocolPlugin({ url: MCP_URL });
         expect(plugin.supportsChain(evm(chainId))).toBe(true);
