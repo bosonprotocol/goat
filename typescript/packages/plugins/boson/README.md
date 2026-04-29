@@ -42,14 +42,12 @@ const plugin = bosonProtocolPlugin({
 
 ### Endpoints & live deployments
 
-The plugin's [`supportsChain`](#compatibility) returns `true` for every chain id below, but offers only resolve through the deployment that actually backs the chain. Pick the endpoint that matches the chain you wallet is on:
+Pick the endpoint that matches the chain your wallet is on:
 
-| Endpoint | URL | Live chain ids (`get_config_ids`) |
-|----------|-----|------------------------------------|
-| Production | `https://mcp.bosonprotocol.io/mcp` | Ethereum mainnet (1), Optimism (10), Base (8453) |
+| Endpoint | URL | Chains |
+|----------|-----|--------|
+| Production | `https://mcp.bosonprotocol.io/mcp` | Ethereum mainnet (1), Optimism (10), Polygon (137), Arbitrum (42161), Base (8453) |
 | Staging | `https://mcp-staging.bosonprotocol.io/mcp` | Polygon Amoy (80002), Base Sepolia (84532), Sepolia (11155111), Optimism Sepolia (11155420), Arbitrum Sepolia (421614) |
-
-Polygon mainnet (137) and Arbitrum (42161) are reserved chain ids — `supportsChain` returns `true` for both, but neither endpoint exposes a live deployment in `get_config_ids` today.
 
 ## Quick start
 
