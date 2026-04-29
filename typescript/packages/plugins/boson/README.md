@@ -203,10 +203,11 @@ Call `get_config_ids` first on every session to discover valid `configId` values
 | Tool | R/W | Description |
 |------|-----|-------------|
 | `get_config_ids` | R | List available deployments — call this first |
-| `sign_typed_data` | W | Produce an EIP-712 signature via the wallet client |
 | `send_meta_transaction` | W | Submit a gasless meta-transaction |
 | `send_native_meta_transaction` | W | Submit a native meta-transaction |
 | `send_forwarded_meta_transaction` | W | Submit a forwarded meta-transaction |
+
+EIP-712 signing is handled by the EVM wallet plugin (`sign_typed_data_evm` on `@goat-sdk/wallet-evm`), not by this plugin.
 
 ## Testing
 
