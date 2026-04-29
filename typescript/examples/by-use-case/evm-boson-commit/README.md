@@ -44,10 +44,29 @@ pnpm ts-node index.ts
 
 ## Example prompts
 
+- "List the configIds, then commit to offer 358 on staging-80002-0 — it's the GOAT SDK permanent demo offer (1 wei, native MATIC, ~1B commits available). Don't redeem."
 - "Show me available offers on the testnet"
 - "What products can I buy with USDC?"
-- "Buy the cheapest available item"
 - "Check the status of my exchanges"
+
+### Permanent demo offer
+
+A permanent offer is live on the staging endpoint specifically so this example
+can run end-to-end without listing your own goods first:
+
+| Field | Value |
+|-------|-------|
+| Endpoint | `https://mcp-staging.bosonprotocol.io/mcp` |
+| `configId` | `staging-80002-0` (Polygon Amoy) |
+| `offerId` | `358` |
+| Price | `1` wei (native MATIC) |
+| `exchangeToken` | `0x0000000000000000000000000000000000000000` |
+| Seller | id `42` (`0x2a91A0148EE62fA638bE38C7eE05c29a3e568dD8`) |
+| Quantity remaining | ~`999,999,998` (effectively unlimited) |
+| Valid until | year 287396 (max practical) |
+
+Commit-to-offer transaction proving it works:
+[`0xcd81dc5c2c2e7d05ed8a4c84e0263f79fc16fc437cc2a65ce5e3028eecf46980`](https://amoy.polygonscan.com/tx/0xcd81dc5c2c2e7d05ed8a4c84e0263f79fc16fc437cc2a65ce5e3028eecf46980).
 
 <footer>
 <br/>
